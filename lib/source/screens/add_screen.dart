@@ -43,14 +43,18 @@ class _AddScreenState extends State<AddScreen> {
                       Expanded(
                           flex: 3,
                           child: OutlinedButton(
-                              onPressed: () {}, child: Text('キャンセル'))),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }, child: Text('キャンセル'))),
                       Spacer(
                         flex: 1,
                       ),
                       Expanded(
                           flex: 3,
                           child: ElevatedButton(
-                              onPressed: () {}, child: Text('保存'))),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }, child: Text('保存'))),
                     ],
                   ),
                 ))
