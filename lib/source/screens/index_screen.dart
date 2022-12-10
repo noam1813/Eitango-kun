@@ -1,3 +1,4 @@
+import 'package:eitango_kun/source/screens/add_screen.dart';
 import 'package:flutter/material.dart';
 
 class IndexScreen extends StatefulWidget {
@@ -15,7 +16,10 @@ class IndexScreenState extends State<IndexScreen> {
         title: Text('IndexScene'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddScreen()));
+        },
         child: Icon(Icons.add),
       ),
     );
