@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class NHInputField extends StatelessWidget {
-  const NHInputField({required this.labelName, Key? key}) : super(key: key);
+  const NHInputField(
+      {required this.labelName, required this.controller, Key? key})
+      : super(key: key);
+
   final String labelName;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,11 @@ class NHInputField extends StatelessWidget {
                 ),
               ),
             )),
-        const Expanded(flex: 3, child: TextField()),
+        Expanded(
+            flex: 3,
+            child: TextField(
+              controller: controller,
+            )),
       ],
     );
   }
