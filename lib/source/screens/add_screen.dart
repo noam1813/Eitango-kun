@@ -69,7 +69,8 @@ class _AddScreenState extends State<AddScreen> {
                                 var result = await _eitangoService.saveEitango(_eitango!);
                                 print(result);
 
-                                Navigator.pop(context);
+                                Navigator.pop(context,true);
+
                               }, child: Text('保存'))),
                     ],
                   ),
