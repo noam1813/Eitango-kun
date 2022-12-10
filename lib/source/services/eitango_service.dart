@@ -11,4 +11,8 @@ class EitangoService{
   saveEitango(Eitango eitango) async {
     return await _repository!.insertData('eitango', eitango.eitangoMap());
   }
+
+  readEitangos() async{
+    return await _repository!.readData('eitango');
+  }
 }
