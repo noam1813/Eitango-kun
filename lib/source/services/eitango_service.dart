@@ -15,4 +15,8 @@ class EitangoService{
   readEitangos() async{
     return await _repository!.readData('eitango');
   }
+
+  readEitangoByID(eitangoID) async{
+    return await _repository!.readDataByID('eitango', eitangoID);
+  }
 }

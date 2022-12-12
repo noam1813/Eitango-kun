@@ -50,8 +50,10 @@ class IndexScreenState extends State<IndexScreen> {
               title: Text(_eitangoList[index].english_word!),
               subtitle: Text(_eitangoList[index].japanese_word!),
               trailing: IconButton(onPressed: ()async{
+                print(_eitangoList[index].japanese_word);
+                print(_eitangoList[index].hashCode);
                 var result  = await Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => EditScreen()));
+                    context, MaterialPageRoute(builder: (context) => EditScreen(eitango: _eitangoList[index],)));
               }, icon: Icon(Icons.edit))
             ),
           );

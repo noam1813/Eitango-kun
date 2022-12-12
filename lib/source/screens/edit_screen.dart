@@ -5,19 +5,27 @@ import '../models/eitango.dart';
 import '../services/eitango_service.dart';
 
 class EditScreen extends StatefulWidget {
-  EditScreen({Key? key}) : super(key: key);
+  final Eitango? eitango;
+  EditScreen({Key? key,required this.eitango}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
+
   Eitango? _eitango = Eitango();
   EitangoService _eitangoService = EitangoService();
   final TextEditingController englishTextFieldController =
       TextEditingController();
   final TextEditingController japaneseTextFieldController =
       TextEditingController();
+
+  void initState(){
+    super.initState();
+    englishTextFieldController.text = widget.eitango!.english_word!;
+    japaneseTextFieldController.text = widget.eitango!.japanese_word!;
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
