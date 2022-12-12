@@ -53,7 +53,11 @@ class IndexScreenState extends State<IndexScreen> {
                 print(_eitangoList[index].japanese_word);
                 print(_eitangoList[index].hashCode);
                 var result  = await Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => EditScreen(eitango: _eitangoList[index],)));
+                    context, MaterialPageRoute(builder: (context) => EditScreen(editingEitango: _eitangoList[index],)));
+                if(result)
+                {
+                  getAlliEitangos();
+                }
               }, icon: Icon(Icons.edit))
             ),
           );

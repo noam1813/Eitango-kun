@@ -5,8 +5,8 @@ import '../models/eitango.dart';
 import '../services/eitango_service.dart';
 
 class EditScreen extends StatefulWidget {
-  final Eitango? eitango;
-  EditScreen({Key? key,required this.eitango}) : super(key: key);
+  final Eitango? editingEitango;
+  EditScreen({Key? key,required this.editingEitango}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _EditScreenState();
@@ -16,15 +16,15 @@ class _EditScreenState extends State<EditScreen> {
 
   Eitango? _eitango = Eitango();
   EitangoService _eitangoService = EitangoService();
-  final TextEditingController englishTextFieldController =
+  final TextEditingController _englishTextFieldController =
       TextEditingController();
-  final TextEditingController japaneseTextFieldController =
+  final TextEditingController _japaneseTextFieldController =
       TextEditingController();
 
   void initState(){
     super.initState();
-    englishTextFieldController.text = widget.eitango!.english_word!;
-    japaneseTextFieldController.text = widget.eitango!.japanese_word!;
+    _englishTextFieldController.text = widget.editingEitango!.english_word!;
+    _japaneseTextFieldController.text = widget.editingEitango!.japanese_word!;
   }
 
   Widget build(BuildContext context) {
@@ -49,13 +49,13 @@ class _EditScreenState extends State<EditScreen> {
                     height: 20,
                   ),
                   NHInputField(
-                      controller: englishTextFieldController,
+                      controller: _englishTextFieldController,
                       labelName: 'English'),
                   Container(
                     height: 20,
                   ),
                   NHInputField(
-                      controller: japaneseTextFieldController,
+                      controller: _japaneseTextFieldController,
                       labelName: '日本語'),
                 ],
               ),
@@ -81,12 +81,12 @@ class _EditScreenState extends State<EditScreen> {
                         flex: 3,
                         child: ElevatedButton(
                             onPressed: () async {
-                              _eitango?.english_word =
-                                  englishTextFieldController.text;
-                              _eitango?.japanese_word =
-                                  japaneseTextFieldController.text;
+                              widget.editingEitango?.english_word =
+                                  _englishTextFieldController.text;
+                              widget.editingEitango?.japanese_word =
+                                  _japaneseTextFieldController.text;
                               var result =
-                                  await _eitangoService.saveEitango(_eitango!);
+                                  await _eitangoService.updateEitango(widget.editingEitango!);
                               print(result);
 
                               Navigator.pop(context, true);
