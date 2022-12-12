@@ -23,4 +23,8 @@ class EitangoService{
   updateEitango(Eitango eitango) async{
     return await _repository!.updateData('eitango', eitango.eitangoMap());
   }
+
+  removeEitango(int eitangoID) async{
+    return await _repository!.removeData('eitango', eitangoID);
+  }
 }

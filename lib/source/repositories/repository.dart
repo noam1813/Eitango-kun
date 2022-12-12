@@ -36,4 +36,9 @@ class Repository{
     var connection = await database;
     return await connection.update(table, data,where: 'id=?',whereArgs: [data['id']]);
   }
+
+  removeData(table,id) async{
+    var connection = await database;
+    return await connection.delete(table,where: 'id=?',whereArgs: [id]);
+  }
 }
