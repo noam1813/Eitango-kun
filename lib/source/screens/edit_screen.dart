@@ -30,11 +30,13 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AddScene'),
+        title: Text('EditScene'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right:8.0),
-            child: IconButton(onPressed: (){},icon: Icon(Icons.delete),),
+            child: IconButton(onPressed: (){
+              Navigator.pop(context, true);
+            },icon: Icon(Icons.delete),),
           )
         ],
       ),
