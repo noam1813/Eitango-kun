@@ -1,4 +1,5 @@
 import 'package:eitango_kun/source/screens/add_screen.dart';
+import 'package:eitango_kun/source/screens/edit_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/eitango.dart';
 import '../services/eitango_service.dart';
@@ -39,6 +40,7 @@ class IndexScreenState extends State<IndexScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('IndexScene'),
+
       ),
       body:ListView.builder(
           itemCount: _eitangoList.length,
@@ -47,7 +49,16 @@ class IndexScreenState extends State<IndexScreen> {
             child: ListTile(
               title: Text(_eitangoList[index].english_word!),
               subtitle: Text(_eitangoList[index].japanese_word!),
-              trailing: IconButton(onPressed: (){}, icon: Icon(Icons.edit))
+              trailing: IconButton(onPressed: ()async{
+                print(_eitangoList[index].japanese_word);
+                print(_eitangoList[index].hashCode);
+                var result  = await Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => EditScreen(editingEitango: _eitangoList[index],)));
+                if(result)
+                {
+                  getAlliEitangos();
+                }
+              }, icon: Icon(Icons.edit))
             ),
           );
       }),
