@@ -6,14 +6,14 @@ import '../services/eitango_service.dart';
 
 class EditScreen extends StatefulWidget {
   final Eitango? editingEitango;
-  EditScreen({Key? key,required this.editingEitango}) : super(key: key);
+
+  EditScreen({Key? key, required this.editingEitango}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _EditScreenState();
 }
 
 class _EditScreenState extends State<EditScreen> {
-
   Eitango? _eitango = Eitango();
   EitangoService _eitangoService = EitangoService();
   final TextEditingController _englishTextFieldController =
@@ -21,7 +21,7 @@ class _EditScreenState extends State<EditScreen> {
   final TextEditingController _japaneseTextFieldController =
       TextEditingController();
 
-  void initState(){
+  void initState() {
     super.initState();
     _englishTextFieldController.text = widget.editingEitango!.english_word!;
     _japaneseTextFieldController.text = widget.editingEitango!.japanese_word!;
@@ -30,11 +30,19 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AddScene'),
+        title: Text('EditScene'),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right:8.0),
-            child: IconButton(onPressed: (){},icon: Icon(Icons.delete),),
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () async {
+                var result = await _eitangoService
+                    .removeEitango(widget.editingEitango!.id!);
+                print(result);
+                Navigator.pop(context, true);
+              },
+              icon: Icon(Icons.delete),
+            ),
           )
         ],
       ),
@@ -85,8 +93,8 @@ class _EditScreenState extends State<EditScreen> {
                                   _englishTextFieldController.text;
                               widget.editingEitango?.japanese_word =
                                   _japaneseTextFieldController.text;
-                              var result =
-                                  await _eitangoService.updateEitango(widget.editingEitango!);
+                              var result = await _eitangoService
+                                  .updateEitango(widget.editingEitango!);
                               print(result);
 
                               Navigator.pop(context, true);

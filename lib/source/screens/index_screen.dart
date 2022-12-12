@@ -16,16 +16,16 @@ class IndexScreenState extends State<IndexScreen> {
 
   late List<Eitango> _eitangoList;
 
-  void initState(){
+  void initState() {
     super.initState();
     getAlliEitangos();
   }
 
-  getAlliEitangos() async{
-    _eitangoList = <Eitango>[];
+  getAlliEitangos() async {
     var eitangos = await _eitangoService.readEitangos();
-    eitangos.forEach((eitango){
-      setState((){
+    setState(() {
+      _eitangoList = <Eitango>[];
+      eitangos.forEach((eitango) {
         var eitangoModel = Eitango();
         eitangoModel.id = eitango['id'];
         eitangoModel.english_word = eitango['english_word'];
@@ -40,36 +40,38 @@ class IndexScreenState extends State<IndexScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('IndexScene'),
-
       ),
-      body:ListView.builder(
+      body: ListView.builder(
           itemCount: _eitangoList.length,
-          itemBuilder: (context,index){
-          return Card(
-            child: ListTile(
-              title: Text(_eitangoList[index].english_word!),
-              subtitle: Text(_eitangoList[index].japanese_word!),
-              trailing: IconButton(onPressed: ()async{
-                print(_eitangoList[index].japanese_word);
-                print(_eitangoList[index].hashCode);
-                var result  = await Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => EditScreen(editingEitango: _eitangoList[index],)));
-                if(result)
-                {
-                  getAlliEitangos();
-                }
-              }, icon: Icon(Icons.edit))
-            ),
-          );
-      }),
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                  title: Text(_eitangoList[index].english_word!),
+                  subtitle: Text(_eitangoList[index].japanese_word!),
+                  trailing: IconButton(
+                      onPressed: () async {
+                        print(_eitangoList[index].japanese_word);
+                        print(_eitangoList[index].hashCode);
+                        var result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditScreen(
+                                      editingEitango: _eitangoList[index],
+                                    )));
+                        if (result) {
+                          getAlliEitangos();
+                        }
+                      },
+                      icon: Icon(Icons.edit))),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
-          var result  = await Navigator.push(
+        onPressed: () async {
+          var result = await Navigator.push(
               context, MaterialPageRoute(builder: (context) => AddScreen()));
-          if(result)
-            {
-              getAlliEitangos();
-            }
+          if (result) {
+            getAlliEitangos();
+          }
         },
         child: Icon(Icons.add),
       ),
