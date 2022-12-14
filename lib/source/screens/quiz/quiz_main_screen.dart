@@ -60,14 +60,67 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
         key: globalKeyAppBar,
         title: Text('Quiz'),
       ),
-      body: Container(
-        color: Colors.blueGrey,
+      body: Column(
+        children: [
+          Container(
+            // Container（グレーのボックス）の高さを、
+            // 画面縦幅の2分の1から、AppBarの上端位置（基本は0）と高さの合計値を引くことで算出
+            height: screenHeight * 0.5 - (appBarDy + appBarHeight),
 
-        // Container（グレーのボックス）の高さを、
-        // 画面縦幅の2分の1から、AppBarの上端位置（基本は0）と高さの合計値を引くことで算出
-        height: screenHeight / 2 - (appBarDy + appBarHeight),
-
-        width: screenWidth,
+            width: screenWidth,
+            child: Center(
+              child: Text(
+                'Apple',
+                style: TextStyle(fontSize: 64, color: Colors.blue),
+              ),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: screenHeight * 0.25 - (appBarDy + appBarHeight),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 60,
+                      width: screenWidth * 0.4,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                    ),
+                    Container(
+                      height: 60,
+                      width: screenWidth * 0.4,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: screenHeight * 0.25 - (appBarDy + appBarHeight),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 60,
+                      width: screenWidth * 0.4,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                    ),
+                    Container(
+                      height: 60,
+                      width: screenWidth * 0.4,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
