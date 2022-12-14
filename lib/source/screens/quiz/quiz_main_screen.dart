@@ -1,3 +1,4 @@
+import 'package:eitango_kun/source/screens/quiz/quiz_result_screen.dart';
 import 'package:flutter/material.dart';
 
 class QuizMainScreen extends StatefulWidget {
@@ -87,7 +88,13 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                          onPressed: () async{
+
+                            var result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => QuizResultScreen()));
+                          }, child: Text('Hello',style: TextStyle(fontSize: 28),)),
                     ),
                     Container(
                       height: 60,
