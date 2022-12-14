@@ -1,8 +1,11 @@
 import 'package:eitango_kun/source/screens/add_screen.dart';
 import 'package:eitango_kun/source/screens/edit_screen.dart';
+import 'package:eitango_kun/source/screens/quiz/quiz_stanby_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/eitango.dart';
 import '../services/eitango_service.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class IndexScreen extends StatefulWidget {
   const IndexScreen({Key? key}) : super(key: key);
@@ -65,16 +68,53 @@ class IndexScreenState extends State<IndexScreen> {
                       icon: Icon(Icons.edit))),
             );
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          var result = await Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddScreen()));
-          if (result) {
-            getAlliEitangos();
-          }
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        animatedIconTheme: IconThemeData(size: 22.0),
+        curve: Curves.bounceIn,
+        children: [
+          SpeedDialChild(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            backgroundColor: Colors.blue,
+            label: '英単語を追加する',
+            onTap: () async {
+              var result = await Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddScreen()));
+              if (result) {
+                getAlliEitangos();
+              }
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(
+              Icons.question_mark,
+              color: Colors.white,
+            ),
+            backgroundColor: Colors.blue,
+            label: '英単語を暗記する',
+            onTap: () async {
+              var result = await Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => QuizStanbyScreen()));
+              if (result) {
+                getAlliEitangos();
+              }
+            },
+          ),
+        ],
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     var result = await Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => AddScreen()));
+      //     if (result) {
+      //       getAlliEitangos();
+      //     }
+      //   },
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }
