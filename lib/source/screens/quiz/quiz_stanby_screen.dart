@@ -1,3 +1,4 @@
+import 'package:eitango_kun/source/screens/quiz/quiz_main_screen.dart';
 import 'package:flutter/material.dart';
 
 class QuizStanbyScreen extends StatefulWidget {
@@ -35,16 +36,16 @@ class _QuizStanbyScreenState extends State<QuizStanbyScreen> {
                 ),
               ),
               ListTile(
-                  title: Text('日本語→英語'),
-                  leading: Radio<QuizMode>(
-                    value: QuizMode.JAPANESE_TO_ENGLISH,
-                    groupValue: _quizMode,
-                    onChanged: (QuizMode? _value) {
-                      setState(() {
-                        _quizMode = _value;
-                      });
-                    },
-                  ),
+                title: Text('日本語→英語'),
+                leading: Radio<QuizMode>(
+                  value: QuizMode.JAPANESE_TO_ENGLISH,
+                  groupValue: _quizMode,
+                  onChanged: (QuizMode? _value) {
+                    setState(() {
+                      _quizMode = _value;
+                    });
+                  },
+                ),
               )
             ],
           ),
@@ -64,7 +65,13 @@ class _QuizStanbyScreenState extends State<QuizStanbyScreen> {
                     Expanded(
                         flex: 3,
                         child: ElevatedButton(
-                            onPressed: () {}, child: Text('開始'))),
+                            onPressed: () async {
+                              var result = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => QuizMainScreen()));
+                            },
+                            child: Text('開始'))),
                   ],
                 ),
               ))

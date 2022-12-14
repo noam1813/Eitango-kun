@@ -68,6 +68,7 @@ class IndexScreenState extends State<IndexScreen> {
                       icon: Icon(Icons.edit))),
             );
           }),
+      //SpeedDialの参考https://dev.classmethod.jp/articles/flutter-use-radio-button/
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
         animatedIconTheme: IconThemeData(size: 22.0),
