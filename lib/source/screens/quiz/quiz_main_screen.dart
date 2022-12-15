@@ -88,19 +88,27 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () async{
-
-                            var result = await Navigator.push(
+                          onPressed: () async {
+                            var result = await Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => QuizResultScreen()));
-                          }, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                                new MaterialPageRoute(
+                                    builder: (context) => QuizResultScreen()),
+                                (_) => false);
+                          },
+                          child: Text(
+                            'Hello',
+                            style: TextStyle(fontSize: 28),
+                          )),
                     ),
                     Container(
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                          onPressed: () {},
+                          child: Text(
+                            'Hello',
+                            style: TextStyle(fontSize: 28),
+                          )),
                     ),
                   ],
                 ),
@@ -114,13 +122,21 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                          onPressed: () {},
+                          child: Text(
+                            'Hello',
+                            style: TextStyle(fontSize: 28),
+                          )),
                     ),
                     Container(
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text('Hello',style: TextStyle(fontSize: 28),)),
+                          onPressed: () {},
+                          child: Text(
+                            'Hello',
+                            style: TextStyle(fontSize: 28),
+                          )),
                     ),
                   ],
                 ),

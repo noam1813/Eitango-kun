@@ -1,5 +1,6 @@
 import 'package:eitango_kun/source/screens/add_screen.dart';
 import 'package:eitango_kun/source/screens/edit_screen.dart';
+import 'package:eitango_kun/source/screens/index_screen.dart';
 import 'package:eitango_kun/source/screens/quiz/quiz_stanby_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +18,7 @@ class QuizResultScreenState extends State<QuizResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('IndexScene'),
+          title: Text('ResultScene'),
         ),
         body: Stack(
           children: [
@@ -43,8 +44,12 @@ class QuizResultScreenState extends State<QuizResultScreen> {
                 child: Container(
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
+                      onPressed: () async{
+                        var result = await Navigator.pushAndRemoveUntil(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => IndexScreen()),
+                                (_) => false);
                       },
                       child: Text('OK')),
                 )),
