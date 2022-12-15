@@ -1,6 +1,9 @@
 import 'package:eitango_kun/source/screens/quiz/quiz_result_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/eitango.dart';
+import '../../services/eitango_service.dart';
+
 class QuizMainScreen extends StatefulWidget {
   QuizMainScreen({Key? key}) : super(key: key);
 
@@ -24,6 +27,29 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
   double appBarDy = 0.0;
   double appBarHeight = 0.0;
 
+  int cnt = 0;
+  final List<String> _stringList = ["1", "2", "3", "4", "5"];
+
+  String _showString = "";
+
+  EitangoService _eitangoService = EitangoService();
+
+  late List<Eitango> _eitangoList;
+
+  void kasan() async {
+    cnt++;
+    if (cnt >= _eitangoList.length) {
+      var result = await Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(builder: (context) => QuizResultScreen()),
+          (_) => false);
+    } else {
+      setState(() {
+        _showString = _eitangoList[cnt].english_word!;
+      });
+    }
+  }
+
   @override
   void initState() {
     // buildメソッドが回り、AppBarの描画終了後に、GlobalKeyの情報を取得するようにするため、
@@ -43,12 +69,27 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
 
       // 確認のため、取得した位置と高さをDebugウィンドウに表示
       print("AppBarの上端位置 $appBarDy、AppBarの高さ $appBarHeight");
-
-      // AppBarの位置と高さを取得後、setStateメソッドで全体を再描画する
-      setState(() {});
     });
 
+    getAlliEitangos();
     super.initState();
+  }
+
+  getAlliEitangos() async {
+    var eitangos = await _eitangoService.readEitangos();
+    setState(() {
+      _eitangoList = <Eitango>[];
+      eitangos.forEach((eitango) {
+        var eitangoModel = Eitango();
+        eitangoModel.id = eitango['id'];
+        eitangoModel.english_word = eitango['english_word'];
+        eitangoModel.japanese_word = eitango['japanese_word'];
+        _eitangoList.add(eitangoModel);
+      });
+      _eitangoList.shuffle();
+      _showString = _eitangoList[cnt].english_word!;
+      // AppBarの位置と高さを取得後、setStateメソッドで全体を再描画する
+    });
   }
 
   @override
@@ -71,7 +112,7 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
             width: screenWidth,
             child: Center(
               child: Text(
-                'Apple',
+                _showString,
                 style: TextStyle(fontSize: 64, color: Colors.blue),
               ),
             ),
@@ -88,12 +129,8 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () async {
-                            var result = await Navigator.pushAndRemoveUntil(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => QuizResultScreen()),
-                                (_) => false);
+                          onPressed: () {
+                            kasan();
                           },
                           child: Text(
                             'Hello',
@@ -104,7 +141,9 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            kasan();
+                          },
                           child: Text(
                             'Hello',
                             style: TextStyle(fontSize: 28),
@@ -122,7 +161,9 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            kasan();
+                          },
                           child: Text(
                             'Hello',
                             style: TextStyle(fontSize: 28),
@@ -132,7 +173,9 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
                       height: 60,
                       width: screenWidth * 0.4,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            kasan();
+                          },
                           child: Text(
                             'Hello',
                             style: TextStyle(fontSize: 28),
